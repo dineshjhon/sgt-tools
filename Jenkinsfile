@@ -91,6 +91,7 @@ pipeline {
 					target_password = props["$target_env"+'_target_password_is']
 					target_version = props["$target_env"+'_target_version_is']					
 				}
+				print " ------ $git_url ------"
 			}
 		}
 		stage('Checkout Source code') {
