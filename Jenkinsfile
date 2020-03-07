@@ -54,7 +54,7 @@ pipeline {
 				
 
 					
-					props = readProperties file: 'properties/Jenkinsfile.properties'
+					
 					
 					module = "${params.MODULE}"
 					branch_prefix = "${params.BRANCH_PREFIX}"
@@ -66,7 +66,7 @@ pipeline {
 					branch = "${branch_prefix}"+"${build_version}"
 					git_url_id = "$module"+"_git_url"
 					
-					
+					props = readProperties file: 'properties/Jenkinsfile.properties'
 					sag_home = props['sag_home']
 					abe_home = props['abe_home']
 					jenkins_ws = props['jenkins_ws']
