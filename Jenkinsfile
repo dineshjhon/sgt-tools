@@ -39,7 +39,7 @@ def target_version
 
 pipeline {
 	environment {
-		sag_home="C:/SoftwareAG101
+		sag_home="C:/SoftwareAG101"
 	}
 	
 	agent any
