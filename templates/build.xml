@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+
+<project default="createProjectReposiotry" basedir=".">	
+
+	 	<!-- Custom scripts for deployment...... -->
+   <taskdef classpath = "${sag.install.dir}/common/lib/ant/ant-contrib-1.0b3.jar" resource="net/sf/antcontrib/antlib.xml"/>	
+	<target name="createProjectReposiotry">
+    
+    <echo message="Prepare Automater file from template ...."/>
+    <delete file="${automator.file}" quiet="true"/>
+    <copy file="${automator.file.tpl}" tofile="${automator.file}" >
+        <filterchain>
+           <striplinecomments>
+              <comment value="!"/>
+           </striplinecomments>
+           <replacetokens>
+                <token key="DEPLOYER_HOST" value="${deployer.host}"/>
+                <token key="DEPLOYER_PORT" value="${deployer.port}"/>
+                <token key="DEPLOYER_USER" value="${deployer.user}"/>
+                <token key="DEPLOYER_PWD" value="${deployer.pwd}"/>
+                <token key="IS_PROJECT_NAME" value="${is_proj.name}"/>
+                <token key="IS_DEPSET_NAME" value="${is_depset.name}"/>
+                <token key="IS_DEPMAP_NAME" value="${is_depmap.name}"/>
+                <token key="IS_DEPCAN_NAME" value="${is_depcan.name}"/>				
+				<token key="DEPLOYER_REPO_NAME" value="${proj_repository.name}"/>
+                <token key="DEPLOYER_REPO_PATH" value="${proj_repository.path}"/>
+                <token key="IS_TARGET_ALIAS" value="${is_target.alias}"/>
+                <token key="IS_TARGET_HOST" value="${is_target.host}"/>
+                <token key="IS_TARGET_PORT" value="${is_target.port}"/>
+                <token key="IS_TARGET_USER" value="${is_target.user}"/>
+                <token key="IS_TARGET_PWD" value="${is_target.pwd}"/>
+				<token key="IS_VERSION" value="${is.version}"/>
+				<token key="IS_COMPOSITE_NAME" value="${is_composite.name.filter}"/>
+            </replacetokens>
+        </filterchain>
+		</copy>
+		<echo message="Automater file name ....${automator.file}"/>
+		
+		<if>
+			<os family="windows"/>
+			<then>
+				<exec executable="cmd" dir="${deployer.home}/bin" failonerror="true">
+					<arg value="/c" /> 
+					<arg value="projectautomator.bat"/>
+					<arg value="${automator.file}" />
+				</exec>
+			</then>
+		<else>
+				<exec executable="/bin/bash" dir="${deployer.home}/bin" failonerror="true">
+					<arg value="projectautomatorUnix.sh"/>
+					<arg value="${automator.file}" />
+				</exec>
+		</else>
+		</if>
+		
+	</target>
+	
+
+</project>
+
