@@ -153,7 +153,7 @@ pipeline {
 	}	
 }
 
-def gitCheckout(branchDir, branchName, Administrator, Password ,  gitURL) {
+def gitCheckout(branchDir, branchName, Administrator, Password,  gitURL) {
 	dir("$branchDir") {
 		git branch: "$branchName", Administrator: "$Administrator", Password: "$Password", url: "$gitURL"
 		bat 'del /F /Q .gitignore README.md'
