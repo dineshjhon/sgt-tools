@@ -13,6 +13,7 @@ def target_env
 def branch
 def branch_source
 def branch_source_path
+def git_credentials
 def Administrator
 def Password
 def git_url_id
@@ -65,6 +66,7 @@ pipeline {
 					sag_home = props['sag_home']
 					abe_home = props['abe_home']
 					jenkins_ws = props['jenkins_ws']
+					git_credentials = props['git_authid']
 					Administrator = props['Administrator']
 					Password = props['Password']
 					git_url = props["$git_url_id"]
@@ -99,7 +101,7 @@ pipeline {
 		stage('Checkout Source code') {
 			steps {
 				print " ------ Checkout source code ------"
-				gitCheckout("$branch_source_path", "$branch", "$Administrator", "$Password", "$git_url")
+				gitCheckout("$branch_source_path", "$branch", "$git_credentials", "$git_url")
 			}
 		}
 
@@ -153,9 +155,9 @@ pipeline {
 	}	
 }
 
-def gitCheckout(branchDir, branchName, Administrator, Password,  gitURL) {
+def gitCheckout(branchDir, branchName, credentialsId, gitURL) {
 	dir("$branchDir") {
-		git branch: "$branchName", Administrator: "$Administrator", Password: "$Password", url: "$gitURL"
+		git branch: "$branchName", credentialsId: "$credentialsId", url: "$gitURL"
 		bat 'del /F /Q .gitignore README.md'
 		bat 'rd /S /Q .git'
 	}
