@@ -99,7 +99,7 @@ pipeline {
 		stage('Checkout Source code') {
 			steps {
 				print " ------ Checkout source code ------"
-				gitCheckout("$branch_source_path", "$branch", "$Administrator", "$Password", $git_url")
+				gitCheckout("$branch_source_path", "$branch", "$Administrator", "$Password", "$git_url")
 			}
 		}
 
