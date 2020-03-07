@@ -152,11 +152,7 @@ pipeline {
 		
 	}
 	
-	post {
-		always {
-			
-		}
-	}	
+		
 }
 
 def gitCheckout(branchDir, branchName, credentialsId, gitURL) {
