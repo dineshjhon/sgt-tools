@@ -65,6 +65,7 @@ pipeline {
 					target_env = "${params.TARGET_ENV}"					
 					branch = "${branch_prefix}"+"${build_version}"
 					git_url_id = "$module"+"_git_url"
+					packageName = "${params.PACKAGE_NAME}"
 					
 					props = readProperties file: 'properties/Jenkinsfile.properties'
 					sag_home = props['sag_home']
@@ -75,8 +76,8 @@ pipeline {
 					Password = props['Password']
 					git_url = props["$git_url_id"]
 				
-					branch_source_path = "$jenkins_ws"+"/"+"${module}"+"/source"
-					branch_build_path = "$jenkins_ws"+"/"+"${module}"+"/build"+"/"+"$build_version"
+					branch_source_path = "$jenkins_ws"+"/"+"${module}"+"/"+"${packageName}"+"/source"
+					branch_build_path = "$jenkins_ws"+"/"+"${module}"+"/"+"${packageName}"+"/build"+"/"+"$build_version"
 					
 					deployer_home = props['deployer_home']
 					deployer_host = props['deployer_host']
