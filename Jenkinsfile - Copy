@@ -65,7 +65,6 @@ pipeline {
 					target_env = "${params.TARGET_ENV}"					
 					branch = "${branch_prefix}"+"${build_version}"
 					git_url_id = "$module"+"_git_url"
-					packageName = "${params.PACKAGE_NAME}"
 					
 					props = readProperties file: 'properties/Jenkinsfile.properties'
 					sag_home = props['sag_home']
